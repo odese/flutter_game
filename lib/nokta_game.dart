@@ -27,8 +27,8 @@ class NoktaGame extends Game {
   }
 
   void spawnDot() {
-    for (var i = 50; i < screenSize.width; i = i + 50) {
-      for (var j = 50; j < screenSize.height - 50; j = j + 50) {
+    for (var i = widthMargin/2; i < screenSize.width; i = i + 50) {
+      for (var j = heightMargin/2; j < screenSize.height; j = j + 50) {
         dots.add(Dot(this, i.toDouble(), j.toDouble()));
       }
     }
@@ -39,11 +39,11 @@ class NoktaGame extends Game {
 
     Paint linePaint = Paint();
     linePaint.color = Colors.blueAccent;
-    for (var i = 0; i < 500; i = i + 50) {
+    for (var i = widthMargin/2; i < 500; i = i + 50) {
       canvas.drawLine(
           Offset(i.toDouble(), 0), Offset(i.toDouble(), 1000), linePaint);
     }
-    for (var j = 0; j < 1500; j = j + 50) {
+    for (var j = heightMargin/2; j < 1500; j = j + 50) {
       canvas.drawLine(
           Offset(0, j.toDouble()), Offset(1000, j.toDouble()), linePaint);
     }
@@ -64,8 +64,8 @@ class NoktaGame extends Game {
 
   void onTapDown(TapDownDetails d) {
     dots.forEach((Dot dot) {
-      if (dot.dotRect.contains(d.globalPosition) && !dots.contains(dot)) {
-        dot.onTapDown();
+      if (dot.dotRect.contains(d.globalPosition)) {
+        dot.onTapDown(dot);
       }
     });
   }
@@ -85,4 +85,6 @@ calculateBoardSize(Size screenSize) {
 
   heightMargin = screenSize.height % 50;
   boardHeight = screenSize.height - heightMargin;
+
+  screenSize = Size(boardWidth, boardHeight);
 }
