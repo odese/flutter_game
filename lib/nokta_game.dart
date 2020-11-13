@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
@@ -23,15 +22,16 @@ class NoktaGame extends Game {
 
   void initialize() async {
     dots = List<Dot>();
-    // rnd = Random();
     resize(await Flame.util.initialDimensions());
     spawnDot();
   }
 
   void spawnDot() {
-    // double x = rnd.nextDouble() * (screenSize.width - tileSize);
-    // double y = rnd.nextDouble() * (screenSize.height - tileSize);
-    dots.add(Dot(this, 50, 50));
+    for (var i = 50; i < screenSize.width; i = i + 50) {
+      for (var j = 50; j < screenSize.height - 50; j = j + 50) {
+        dots.add(Dot(this, i.toDouble(), j.toDouble()));
+      }
+    }
   }
 
   void render(Canvas canvas) {
@@ -53,7 +53,6 @@ class NoktaGame extends Game {
 
   void update(double t) {
     dots.forEach((Dot dot) => dot.update(t));
-    // dots.removeWhere((Dot dot) => dot.isOffScreen);
   }
 
   void resize(Size size) {
@@ -65,7 +64,7 @@ class NoktaGame extends Game {
 
   void onTapDown(TapDownDetails d) {
     dots.forEach((Dot dot) {
-      if (dot.dotRect.contains(d.globalPosition)) {
+      if (dot.dotRect.contains(d.globalPosition) && !dots.contains(dot)) {
         dot.onTapDown();
       }
     });
@@ -76,7 +75,7 @@ boardRendering(Canvas canvas) {
   Rect board =
       Rect.fromLTWH(widthMargin / 2, heightMargin / 2, boardWidth, boardHeight);
   Paint boardColor = Paint();
-  boardColor.color = Colors.white70;
+  boardColor.color = Colors.white;
   canvas.drawRect(board, boardColor);
 }
 

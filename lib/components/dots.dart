@@ -7,36 +7,24 @@ class Dot {
   Rect dotRect;
   RRect dotRectx;
   Paint dotPaint;
-  bool isDead = false;
-  bool isOffScreen = false;
 
   Dot(this.game, double x, double y) {
-    // dotRect = Rect.fromLTWH(x, y, game.tileSize, game.tileSize);
-    dotRect = Rect.fromCircle(center: Offset(100, 100), radius: 10);
+    dotRect = Rect.fromCircle(center: Offset(x, y), radius: 10);
     dotRectx = RRect.fromRectXY(dotRect, 1000, 1000);
     dotPaint = Paint();
-    dotPaint.color = Colors.red;
+    dotPaint.color = Colors.transparent;
   }
 
   void render(Canvas c) {
-    // c.drawRect(dotRect, dotPaint);
     c.drawRRect(dotRectx, dotPaint);
-    // c.drawCircle(Offset(200, 200), 100, dotPaint);
-    // c.drawCircle(Offset(200, 500), 100, dotPaint);
   }
 
-  void update(double t) {
-    // if (isDead) {
-    //   dotRect = dotRect.translate(0, game.tileSize * 12 * t);
-    // }
-    // if (dotRect.top > game.screenSize.height) {
-    //   isOffScreen = true;
-    // }
-  }
+  void update(double t) {}
 
   void onTapDown() {
-    // isDead = true;
-    dotPaint.color = Colors.black;
-    // game.spawnDot();
+    // if player1
+    dotPaint.color = Colors.red;
+    // else
+    //dotPaint.color = Colors.blue;
   }
 }
