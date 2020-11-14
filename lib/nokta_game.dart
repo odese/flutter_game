@@ -27,8 +27,8 @@ class NoktaGame extends Game {
   }
 
   void spawnDot() {
-    for (var i = widthMargin/2; i < screenSize.width; i = i + 50) {
-      for (var j = heightMargin/2; j < screenSize.height; j = j + 50) {
+    for (var i = widthMargin/2; i < screenSize.width; i = i + 25) {
+      for (var j = heightMargin/2; j < screenSize.height; j = j + 25) {
         dots.add(Dot(this, i.toDouble(), j.toDouble()));
       }
     }
@@ -39,11 +39,11 @@ class NoktaGame extends Game {
 
     Paint linePaint = Paint();
     linePaint.color = Colors.blueAccent;
-    for (var i = widthMargin/2; i < 500; i = i + 50) {
+    for (var i = widthMargin/2; i < 500; i = i + 25) {
       canvas.drawLine(
           Offset(i.toDouble(), 0), Offset(i.toDouble(), 1000), linePaint);
     }
-    for (var j = heightMargin/2; j < 1500; j = j + 50) {
+    for (var j = heightMargin/2; j < 1500; j = j + 25) {
       canvas.drawLine(
           Offset(0, j.toDouble()), Offset(1000, j.toDouble()), linePaint);
     }

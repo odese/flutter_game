@@ -16,7 +16,7 @@ class Dot {
 
 
   Dot(this.game, double x, double y) {
-    dotRect = Rect.fromCircle(center: Offset(x, y), radius: 10);
+    dotRect = Rect.fromCircle(center: Offset(x, y), radius: 5);
     dotRectx = RRect.fromRectXY(dotRect, 1000, 1000);
     dotPaint = Paint();
     dotPaint.color = Colors.transparent;
@@ -43,7 +43,7 @@ class Dot {
     // game.spawnDot();
     dotPaint.color = Colors.red;
     // paintArea(dot);
-    areaColor.color = Colors.green.withOpacity(0.5);
+    //areaColor.color = Colors.green.withOpacity(0.5);
     // else
     //dotPaint.color = Colors.blue;
   }
