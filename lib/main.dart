@@ -6,6 +6,7 @@ import 'package:flame/util.dart';
 
 void main() {
   NoktaGame game = NoktaGame();
+
   runApp(game.widget);
 
   Util flameUtil = Util();
