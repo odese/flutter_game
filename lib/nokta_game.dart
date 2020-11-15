@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter_app/components/dots.dart';
-import 'package:flutter_app/components/dots.dart' as xx;
 
 double boardWidth;
 double boardHeight;
@@ -57,8 +56,6 @@ class NoktaGame extends Game {
 
   void update(double t) {
     dots.forEach((Dot dot) => dot.update(t));
-
-    // dots.removeWhere((Dot dot) => dot.isOffScreen);
   }
 
   void resize(Size size) {
