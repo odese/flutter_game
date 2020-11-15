@@ -41,13 +41,15 @@ class NoktaGame extends Game {
 
     Paint linePaint = Paint();
     linePaint.color = Colors.blueAccent;
-    for (var i = widthMargin / 2; i < 500; i = i + 50) {
+    for (var i = widthMargin / 2; i < boardWidth; i = i + 50) {
       canvas.drawLine(
-          Offset(i.toDouble(), 0), Offset(i.toDouble(), 1000), linePaint);
+          Offset(i.toDouble(), heightMargin / 2),
+          Offset(i.toDouble(), screenSize.height - (heightMargin / 2)),
+          linePaint);
     }
-    for (var j = heightMargin / 2; j < 1500; j = j + 50) {
-      canvas.drawLine(
-          Offset(0, j.toDouble()), Offset(1000, j.toDouble()), linePaint);
+    for (var j = heightMargin / 2; j < boardHeight; j = j + 50) {
+      canvas.drawLine(Offset(widthMargin / 2, j.toDouble()),
+          Offset(screenSize.width - widthMargin / 2, j.toDouble()), linePaint);
     }
 
     dots.forEach((Dot dot) => dot.render(canvas));
