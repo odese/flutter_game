@@ -9,8 +9,8 @@ class Linex {
   Offset of2;
   Paint pai = Paint()
     ..color = Colors.red
-    ..style = PaintingStyle.fill;
-  // ..strokeWidth = 8;
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 8;
   double x1;
   double y1;
   double x2;
