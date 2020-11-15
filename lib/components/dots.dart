@@ -24,6 +24,10 @@ class Dot {
   bool isOffScreen = false;
   List<Dot> dots;
 
+  double x1;
+  double y1;
+  double x2;
+  double y2;
 
   // void initialize() {
   //   canvas2 = this.game.canvas;
@@ -44,8 +48,12 @@ class Dot {
     lineList = List<Linex>();
 
     void spawnLine() {
-      lineList.add(Linex(this.game, Offset(newDotx.x, newDotx.y),
-          Offset(oldDotx.x, oldDotx.y), linexColor));
+      x1 = newDotx.x;
+      y1 = newDotx.y;
+      x2 = oldDotx.x;
+      y2 = oldDotx.y;
+
+      lineList.add(Linex(this.game, x1, y1, x2, y2, linexColor));
     }
 
     void initialize() async {
@@ -134,16 +142,19 @@ class Dot {
     for (var k = 0; k < clickedDots.length; k++) {
       if (newDot.radarRectx
           .contains(Offset((clickedDots[k]).x, (clickedDots[k]).y))) {
-        print("contains");
+        // print("contains");
         oldDotx = clickedDots[k];
+        x1 = newDotx.x;
+        y1 = newDotx.y;
+        x2 = oldDotx.x;
+        y2 = oldDotx.y;
         // render.renderLine(newDotx, oldDotx);
-        print(Offset(newDotx.x, newDotx.y));
-        print(Offset(oldDotx.x, oldDotx.y));
-        print(dotPaint);
-        print(this.game.canvas);
+        // print(Offset(newDotx.x, newDotx.y));
+        // print(Offset(oldDotx.x, oldDotx.y));
+        // print(dotPaint);
+        // print(this.game.canvas);
 
-        lineList.add(Linex(this.game, Offset(newDotx.x, newDotx.y),
-            Offset(oldDotx.x, oldDotx.y), lineColor));
+        lineList.add(Linex(this.game, x1, y1, x2, y2, lineColor));
       }
       oldDotx = newDot;
     }
