@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/nokta_game.dart';
-
 import 'package:flame/util.dart';
 
 void main() {

@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter_app/components/dots.dart';
+import 'package:flutter_app/components/dots.dart' as xx;
 
 double boardWidth;
 double boardHeight;
@@ -15,6 +16,7 @@ class NoktaGame extends Game {
   Size boardSize;
   double tileSize;
   List<Dot> dots;
+  Canvas canvas;
 
   NoktaGame() {
     initialize();
@@ -27,8 +29,8 @@ class NoktaGame extends Game {
   }
 
   void spawnDot() {
-    for (var i = widthMargin/2; i < screenSize.width; i = i + 50) {
-      for (var j = heightMargin/2; j < screenSize.height; j = j + 50) {
+    for (var i = widthMargin / 2; i < screenSize.width; i = i + 50) {
+      for (var j = heightMargin / 2; j < screenSize.height; j = j + 50) {
         dots.add(Dot(this, i.toDouble(), j.toDouble()));
       }
     }
@@ -39,11 +41,11 @@ class NoktaGame extends Game {
 
     Paint linePaint = Paint();
     linePaint.color = Colors.blueAccent;
-    for (var i = widthMargin/2; i < 500; i = i + 50) {
+    for (var i = widthMargin / 2; i < 500; i = i + 50) {
       canvas.drawLine(
           Offset(i.toDouble(), 0), Offset(i.toDouble(), 1000), linePaint);
     }
-    for (var j = heightMargin/2; j < 1500; j = j + 50) {
+    for (var j = heightMargin / 2; j < 1500; j = j + 50) {
       canvas.drawLine(
           Offset(0, j.toDouble()), Offset(1000, j.toDouble()), linePaint);
     }
@@ -53,6 +55,8 @@ class NoktaGame extends Game {
 
   void update(double t) {
     dots.forEach((Dot dot) => dot.update(t));
+
+    // dots.removeWhere((Dot dot) => dot.isOffScreen);
   }
 
   void resize(Size size) {
