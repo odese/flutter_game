@@ -75,7 +75,6 @@ class Dot {
     c.drawRRect(radarRectx, radarColor);
 
     lineList.forEach((Linex line) => line.render(c));
-    for (var k = 0; k < lineList.length; k++) {}
   }
 
   void update(double t) {
@@ -87,23 +86,33 @@ class Dot {
 
     dotPaint.color = Colors.red;
 
+    name = name + "-" + dotPaint.color.toString();
+
     radarColor.color = Colors.green.withOpacity(0.1);
 
     isNewAreaFormed(dot);
 
     clickedDots.add(dot);
-    name = name + "-" + dotPaint.color.toString();
-    print(name);
+  }
+
+  List splitName(Dot dot) {
+    return dot.name.split("-");
   }
 
   void isNewAreaFormed(Dot newDot) {
+    print(splitName(newDot));
+
     Paint lineColor = Paint();
+
     lineColor.color = Colors.black;
+
     newDotx = newDot;
     for (var k = 0; k < clickedDots.length; k++) {
       if (newDot.radarRectx
           .contains(Offset((clickedDots[k]).x, (clickedDots[k]).y))) {
         oldDotx = clickedDots[k];
+
+        //if (newDotx.name) x1 = newDotx.x;
         x1 = newDotx.x;
         y1 = newDotx.y;
         x2 = oldDotx.x;
