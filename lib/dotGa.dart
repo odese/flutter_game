@@ -20,33 +20,26 @@ class DotGa extends Game {
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
-    addDotToDotList();
-  }
-
-  void addDotToDotList() {
-    for (var i = widthMargin / 2; i <= (screenSize.width - widthMargin / 2); i = i + 50) {
-      for (var j = heightMargin / 2; j <= (screenSize.height - heightMargin / 2); j = j + 50) {
-        dotList.add(Dot(this, i.toDouble(), j.toDouble()));
-      }
-    }
+    fillDotList();
   }
 
   void render(Canvas canvas) {
     boardRendering(canvas);
-    // dotList.forEach((Dot dot) => dot.spawnDot(canvas));
-    // for (var i = 0; i < dotList.length; i++) {
-    //   if dotList[i].isClicked == true {
-        // dot.render(canvas, dotList[i])
-    // }
-    //   dotList.forEach((Dot dot) => dot.render(canvas));
-    // } 
-    dotList.forEach((Dot dot) => dot.render(canvas));
+    dotRendering(canvas);
   }
 
-  void update(double t) {
-    // dotList.forEach((Dot dot) => dot.updateDot(t));
+  void update(double t) {}
 
-    // dots.removeWhere((Dot dot) => dot.isOffScreen);
+  void onTapDown(TapDownDetails d) {
+    for (var i = 0; i < dotList.length; i++) {
+      if (dotList[i].isClicked == false) {
+        Dot dot = dotList[i];
+        Rect hitBox = dot.hitBox(dot);
+        if (hitBox.contains(d.globalPosition)) {
+          dot.onTapDown(dot);
+        }
+      }
+    }
   }
 
   void resize(Size size) {
@@ -54,13 +47,22 @@ class DotGa extends Game {
     calculateBoardSize(screenSize);
   }
 
-  void onTapDown(TapDownDetails d) {
-    dotList.forEach((Dot dot) {
-      var hitBox = Rect.fromCircle(center: Offset(dot.x, dot.y), radius: 25);
-      if (hitBox.contains(d.globalPosition)) {
-        dot.onTapDown(dot);
+  calculateBoardSize(Size screenSize) {
+    widthMargin = screenSize.width % 50;
+    boardWidth = screenSize.width - widthMargin;
+
+    heightMargin = screenSize.height % 50;
+    boardHeight = screenSize.height - heightMargin;
+  }
+
+  void fillDotList() {
+    var dotPaint = Paint();
+    dotPaint.color = Colors.transparent;
+    for (var i = widthMargin / 2; i <= (screenSize.width - widthMargin / 2); i = i + 50) {
+      for (var j = heightMargin / 2; j <= (screenSize.height - heightMargin / 2); j = j + 50) {
+        dotList.add(Dot(i.toDouble(), j.toDouble(), dotPaint, false));
       }
-    });
+    }
   }
 
   boardRendering(Canvas canvas) {
@@ -79,11 +81,12 @@ class DotGa extends Game {
     }
   }
 
-  calculateBoardSize(Size screenSize) {
-    widthMargin = screenSize.width % 50;
-    boardWidth = screenSize.width - widthMargin;
-
-    heightMargin = screenSize.height % 50;
-    boardHeight = screenSize.height - heightMargin;
+  dotRendering(Canvas canvas) {
+    for (var i = 0; i < dotList.length; i++) {
+      if (dotList[i].isClicked == true) {
+        Dot dot = dotList[i];
+        dot.renderDot(canvas, dotList[i]);
+      }
+    }
   }
 }

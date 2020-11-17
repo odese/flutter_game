@@ -6,7 +6,6 @@ import 'package:flame/util.dart';
 
 void main() {
   DotGa game = DotGa();
-
   runApp(game.widget);
 
   initializeFlameUtil(game);
