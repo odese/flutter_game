@@ -68,9 +68,25 @@ class Dot {
     double rad;
     rad = 50 * sqrt(2).toDouble();
     radarRect = Rect.fromCircle(center: Offset(this.x, this.y), radius: rad);
-    radarRectx = RRect.fromRectXY(radarRect, 1000, 1000);
+    radarRectx = RRect.fromRectAndRadius(radarRect, Radius.circular(rad));
+    // radarRectx = RRect.fromRe(rad, rad, rad, rad, Radius.circular(rad));
     radarColor = Paint();
     radarColor.color = Colors.transparent;
+  }
+
+  // Creates and returns radar for a dot
+  radar(Dot dot) {
+    double rad = 50 * sqrt(2).toDouble();
+    radarRect = Rect.fromCircle(center: Offset(dot.x, dot.y), radius: rad);
+    RRect radar = RRect.fromRectAndRadius(radarRect, Radius.circular(rad));
+    return radar;
+  }
+
+  // For testing radar
+  drawRadar(Canvas canvas, RRect radar) {
+    Paint color = Paint();
+    color.color = Colors.green.withOpacity(0.1);
+    canvas.drawRRect(radar, color);
   }
 
   void render(Canvas c) {
@@ -140,8 +156,7 @@ class Dot {
     lineColor.color = Colors.black;
     newDotx = newDot;
     for (var k = 0; k < clickedDots.length; k++) {
-      if (newDot.radarRectx
-          .contains(Offset((clickedDots[k]).x, (clickedDots[k]).y))) {
+      if (newDot.radarRectx.contains(Offset((clickedDots[k]).x, (clickedDots[k]).y))) {
         // print("contains");
         oldDotx = clickedDots[k];
         x1 = newDotx.x;

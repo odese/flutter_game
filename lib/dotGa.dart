@@ -34,6 +34,12 @@ class DotGa extends Game {
   void render(Canvas canvas) {
     boardRendering(canvas);
     // dotList.forEach((Dot dot) => dot.spawnDot(canvas));
+    // for (var i = 0; i < dotList.length; i++) {
+    //   if dotList[i].isClicked == true {
+        // dot.render(canvas, dotList[i])
+    // }
+    //   dotList.forEach((Dot dot) => dot.render(canvas));
+    // } 
     dotList.forEach((Dot dot) => dot.render(canvas));
   }
 
