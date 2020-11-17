@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/nokta_game.dart';
+import 'package:flutter_app/dotGa.dart';
 
 class Linex {
-  final NoktaGame game;
+  final DotGa game;
   Linex line;
   Offset of1;
   Offset of2;

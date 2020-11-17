@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/nokta_game.dart';
+import 'package:flutter_app/dotGa.dart';
 import 'lines.dart';
 
 bool isOverlapped;
@@ -11,7 +11,7 @@ List<Linex> lineList;
 class Dot {
   Dot newDotx;
   Dot oldDotx;
-  final NoktaGame game;
+  final DotGa game;
   Rect dotRect;
   Rect radarRect;
   Paint radarColor;

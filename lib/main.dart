@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/nokta_game.dart';
+import 'package:flutter_app/dotGa.dart';
 import 'package:flame/util.dart';
 
 void main() {
-  NoktaGame game = NoktaGame();
+  DotGa game = DotGa();
 
   runApp(game.widget);
 
+  initializeFlameUtil(game);
+}
+
+initializeFlameUtil(DotGa game) {
   Util flameUtil = Util();
   flameUtil.fullScreen();
   flameUtil.setOrientation(DeviceOrientation.portraitUp);
