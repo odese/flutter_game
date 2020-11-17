@@ -8,7 +8,7 @@ class Dot {
   Paint paint;
   bool isClicked;
 
-  Dot(double x, double y, Paint paint, bool isClicked) {
+  Dot(double x, y, Paint paint, bool isClicked) {
     this.x = x;
     this.y = y;
     this.paint = paint;

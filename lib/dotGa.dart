@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter_app/components/dot.dart';
+// import 'package:flutter_app/components/line.dart';
 
 class DotGa extends Game {
   Size screenSize;
@@ -31,15 +32,7 @@ class DotGa extends Game {
   void update(double t) {}
 
   void onTapDown(TapDownDetails d) {
-    for (var i = 0; i < dotList.length; i++) {
-      if (dotList[i].isClicked == false) {
-        Dot dot = dotList[i];
-        Rect hitBox = dot.hitBox(dot);
-        if (hitBox.contains(d.globalPosition)) {
-          dot.onTapDown(dot);
-        }
-      }
-    }
+    paintDot(d);
   }
 
   void resize(Size size) {
@@ -86,6 +79,18 @@ class DotGa extends Game {
       if (dotList[i].isClicked == true) {
         Dot dot = dotList[i];
         dot.renderDot(canvas, dotList[i]);
+      }
+    }
+  }
+
+  paintDot(TapDownDetails d) {
+    for (var i = 0; i < dotList.length; i++) {
+      if (dotList[i].isClicked == false) {
+        Dot dot = dotList[i];
+        Rect hitBox = dot.hitBox(dot);
+        if (hitBox.contains(d.globalPosition)) {
+          dot.onTapDown(dot);
+        }
       }
     }
   }
