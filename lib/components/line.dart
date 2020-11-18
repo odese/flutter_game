@@ -20,13 +20,6 @@ class Line {
     line.paint.strokeWidth = 3;
     path.moveTo(line.x1, line.y1);
     path.lineTo(line.x2, line.y2);
-    
-    // path.fillType = PathFillType.nonZero;
     c.drawPath(path, line.paint);
-    
-    // c.drawLine(Offset(line.x1, line.y1), Offset(line.x2, line.y2), line.paint);
   }
-
-
-
 }

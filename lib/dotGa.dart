@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter_app/components/dot.dart';
-// import 'package:flutter_app/components/line.dart';
+import 'package:flutter_app/components/line.dart';
 
 class DotGa extends Game {
   Size screenSize;
@@ -14,6 +14,7 @@ class DotGa extends Game {
   double widthMargin;
   double heightMargin;
   List<Dot> dotList = List<Dot>();
+  List<Line> lineList = List<Line>();
 
   DotGa() {
     initialize();
@@ -27,12 +28,14 @@ class DotGa extends Game {
   void render(Canvas canvas) {
     boardRendering(canvas);
     dotRendering(canvas);
+    lineRendering(canvas);
   }
 
   void update(double t) {}
 
   void onTapDown(TapDownDetails d) {
     paintDot(d);
+    updateLineList();
   }
 
   void resize(Size size) {
@@ -93,5 +96,24 @@ class DotGa extends Game {
         }
       }
     }
+  }
+
+  updateLineList() {
+    for (var i = 0; i < dotList.length; i++) {
+      if (dotList[i].isClicked == true) {
+        Dot dot = dotList[i];
+        RRect radar = dot.radar(dot);
+        for (var j = 0; j < dotList.length; j++) {
+          Dot adjacentDot = dotList[j];
+          if (radar.contains(Offset(adjacentDot.x, adjacentDot.y)) && adjacentDot.isClicked == true && adjacentDot.paint == dot.paint) {
+            lineList.add(Line(dot.x, dot.y, adjacentDot.x, adjacentDot.y, dot.paint));
+          }
+        }
+      }
+    }
+  }
+
+  lineRendering(canvas) {
+    lineList.forEach((Line line) => line.renderLine(canvas, line));
   }
 }
