@@ -7,6 +7,7 @@ import 'package:flutter_app/components/dot.dart';
 import 'package:flutter_app/components/line.dart';
 
 class DotGa extends Game {
+  
   Size screenSize;
   Size boardSize;
   double boardWidth;
